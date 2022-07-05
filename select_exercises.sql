@@ -1,19 +1,21 @@
 USE mysql;
 Use albums_db;
 SELECT * FROM albums;
+
 SELECT DISTINCT artist FROM albums;
 /* 31 Rows in Albums, 23 Unique artists, id is the primary key, 1967 is the oldest release date and 2011 is the newest release date. */
+
 SELECT name FROM albums WHERE artist = 'Pink Floyd';
+/* Album's by Pink Floyd are 'The Dark Side of the Moon' and 'The Wall',*/
+
 SELECT release_date FROM albums WHERE name = "Sgt. Pepper's Lonely Hearts Club Band";
+ -- Sgt. Pepper was released 1967, 
+
 SELECT genre FROM albums WHERE name = 'Nevermind';
+-- Nevermind's genre is "Grunge, Alternative Rock,
+
 SELECT name FROM albums WHERE release_date BETWEEN 1990 AND 1999;
-SELECT name FROM albums WHERE sales < 20000000;
-SELECT name FROM albums WHERE genre = "Rock";
-/* Album's by Pink Floyd are 'The Dark Side of the Moon' and 'The Wall',
- Sgt. Pepper was released 1967, 
- Nevermind's genre is "Grunge, Alternative Rock, 
- 
-'The Bodyguard'
+/* 'The Bodyguard'
 'Jagged Little Pill'
 'Come On Over'
 'Falling into You'
@@ -24,9 +26,10 @@ SELECT name FROM albums WHERE genre = "Rock";
 'Metallica'
 'Nevermind'
 'Supernatural'
-were released in the 1990s, 
+were released in the 1990s, */
 
-'Thriller'
+SELECT name FROM albums WHERE sales < 20000000;
+/*'Thriller'
 'Back in Black'
 'The Dark Side of the Moon'
 'Bat Out of Hell'
@@ -57,9 +60,10 @@ were released in the 1990s,
 'The Wall'
 'Supernatural'
 'Appetite for Destruction'
- had less than 20,000,000 certified sales, 
-
-'Sgt. Pepper\'s Lonely Hearts Club Band'
+ had less than 20,000,000 certified sales, */
+ 
+SELECT name FROM albums WHERE genre = "Rock";
+/*'Sgt. Pepper\'s Lonely Hearts Club Band'
 '1'
 'Abbey Road'
 'Born in the U.S.A.'
