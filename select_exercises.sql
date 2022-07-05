@@ -9,7 +9,11 @@ SELECT genre FROM albums WHERE name = 'Nevermind';
 SELECT name FROM albums WHERE release_date BETWEEN 1990 AND 1999;
 SELECT name FROM albums WHERE sales < 20000000;
 SELECT name FROM albums WHERE genre = "Rock";
-/* Album's by Pink Floyd are 'The Dark Side of the Moon' and 'The Wall', Sgt. Pepper was released 1967, Nevermind's genre is "Grunge, Alternative Rock, 'The Bodyguard'
+/* Album's by Pink Floyd are 'The Dark Side of the Moon' and 'The Wall',
+ Sgt. Pepper was released 1967, 
+ Nevermind's genre is "Grunge, Alternative Rock, 
+ 
+'The Bodyguard'
 'Jagged Little Pill'
 'Come On Over'
 'Falling into You'
@@ -20,7 +24,9 @@ SELECT name FROM albums WHERE genre = "Rock";
 'Metallica'
 'Nevermind'
 'Supernatural'
-were released in the 1990s, 'Thriller'
+were released in the 1990s, 
+
+'Thriller'
 'Back in Black'
 'The Dark Side of the Moon'
 'Bat Out of Hell'
@@ -51,7 +57,9 @@ were released in the 1990s, 'Thriller'
 'The Wall'
 'Supernatural'
 'Appetite for Destruction'
- had less than 20,000,000 certified sales, 'Sgt. Pepper\'s Lonely Hearts Club Band'
+ had less than 20,000,000 certified sales, 
+
+'Sgt. Pepper\'s Lonely Hearts Club Band'
 '1'
 'Abbey Road'
 'Born in the U.S.A.'
