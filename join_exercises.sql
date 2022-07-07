@@ -136,22 +136,25 @@ Join employees on dept_emp.emp_no = employees.emp_no
 WHERE dept_manager.to_date >= NOW();
 
 -- 12
-/* THIS IS MISSING THE START WILL ADD SHORTLY */
+/* Yay.... Subqueries. */
+SELECT dmock.dept_name, dmock.sal, salmock.namebo FROM
+
 (SELECT d.dept_name, d.dept_no, MAX(s.salary) AS sal
 FROM salaries s
 JOIN dept_emp de 
-Using (emp_no)
+Using(emp_no)
 JOIN departments d
-Using (dept_no)
+Using(dept_no)
 WHERE de.to_date >= NOW() AND s.to_date >= NOW()
-GROUP BY dept_name)dmock
+GROUP BY dept_name) dmock
+
 LEFT JOIN
-(SELECT CONCAT(e.first_name, " ", e.last_name) naebo, s.salary, d.dept_name
+(SELECT CONCAT(e.first_name, " ", e.last_name) namebo, s.salary, d.dept_name
 FROM employees e
 Join salaries s Using (emp_no)
 JOIN dept_emp de USING (emp_no)
-JOIN depeartments d USING (dept_no)
+JOIN departments d USING (dept_no)
 WHERE de.to_date > NOW()
 AND s.to_date > NOW()) salmock
 
-ON demock.dept_name = salmock.dept_name AND dmock.sal = salmock.salary;
+ON dmock.dept_name = salmock.dept_name AND dmock.sal = salmock.salary;
