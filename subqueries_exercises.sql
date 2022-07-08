@@ -53,6 +53,8 @@ USING (emp_no)
 WHERE to_date >= NOW() AND salary > (
 SELECT round(avg(salary))
 FROM salaries))has;
+/* WHERE **HATES** non-tangible numbers, you have to turn formulas into a 'number' with a subquery before
+running them through WHERE or mathmatic formulas in WHERE */
 -- All Employees who CURRENTLY have a higher salary then the company historic average.
 
 SELECT COUNT(*)
@@ -72,3 +74,38 @@ AND to_date >= NOW();
 
 /* Number of Current salaries within 1 standard deviation of the current highest salary 
 ((That was tricky, have to remember to pull current on all data entered)).*/
+
+-- BONUS 1:
+-- Find the department names for departments that have female managers.
+SELECT dept_name AS 'Department', first_name AS 'First Name', last_name AS 'Last Name'
+FROM 
+(
+SELECT *
+FROM dept_manager dm
+JOIN employees e
+USING (emp_no)
+JOIN departments d
+USING (dept_no)
+WHERE e.gender = 'F' AND dm.to_date >= NOW()
+)fm;
+
+-- BONUS 2:
+-- Name of the employee with highest Salary
+SELECT CONCAT (first_name, ' ', last_name) AS 'Highest Paid Employee'
+FROM employees
+JOIN salaries
+USING (emp_no)
+WHERE salary = (SELECT Max(salary) FROM salaries WHERE to_date >= NOW());
+
+-- BONUS 3:
+-- Find the department name that the employee with the higest salary works in
+
+SELECT d.dept_name AS "Department of Highest Salary Employee"
+FROM dept_emp de
+JOIN departments d
+USING (dept_no)
+JOIN employees
+USING (emp_no)
+JOIN salaries s
+USING (emp_no)
+WHERE salary = (SELECT Max(salary) FROM salaries WHERE to_date >= NOW());
