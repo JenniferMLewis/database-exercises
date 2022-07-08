@@ -72,6 +72,35 @@ WHERE to_date >= NOW()
 ) 
 AND to_date >= NOW();
 
+/* WHAT?!?! I DON'T HAVE TO DO ANYTHING EXCEPT SELECT?? ....is SELECT their verion of PRINT()? 
+I think I vaguely remember that being mentioned. World on it's head again.*/
+
+SELECT
+(
+SELECT COUNT(*)
+FROM salaries
+WHERE salary > 
+(
+SELECT MAX(salary) 
+FROM salaries 
+WHERE to_date >= NOW()
+)
+ - 
+(
+SELECT STDDEV(salary) 
+FROM salaries 
+WHERE to_date >= NOW()
+) 
+AND to_date >= NOW()
+)
+/
+(
+SELECT COUNT(*)
+FROM salaries
+WHERE to_date >= NOW()
+)
+*100;
+
 /* Number of Current salaries within 1 standard deviation of the current highest salary 
 ((That was tricky, have to remember to pull current on all data entered)).*/
 
