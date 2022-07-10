@@ -62,10 +62,24 @@ GROUP BY dept_name
 );
 SELECT * FROM departments_average_salary;
 
-SELECT salary,
+ALTER TABLE departments_average_salary add overall_avg float(10,2);
+ALTER TABLE departments_average_salary add overall_std float(10,2);
+ALTER TABLE departments_average_salary add zscore float(10,2);
+
+UPDATE departments_average_salary set overall_avg = (select avg_salary FROM salary_avgs);
+UPDATE departments_average_salary set overall_std = (select sd_salary FROM salary_avgs);
+
+UPDATE departments_average_salary set zscore = (dept_salary_avg - overall_avg) / overall_std;
+
+SELECT * from departments_average_salary
+ORDER BY zscore DESC;
+
+-- Sales is the best department to work for in terms of salary, and Human Resources the worst.
+
+/* SELECT salary,
     (salary - (SELECT AVG(salary) FROM salaries))
     /
     (SELECT stddev(salary) FROM salaries) AS zscore
-FROM salaries;
+FROM salaries; */
 
 
