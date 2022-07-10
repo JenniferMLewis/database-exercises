@@ -43,3 +43,29 @@ LIMIT 10;
 DROP TABLE payment_copy;
 
 
+-- AVG salary at company vs. AVG salary per dept
+
+CREATE temporary Table salary_avgs AS 
+(
+SELECT avg(salary) as avg_salary, stddev(salary) as sd_salary FROM employees.salaries WHERE to_date > now()
+);
+SELECT * FROM salary_avgs;
+
+CREATE TEMPORARY TABLE departments_average_salary AS 
+(
+SELECT dept_name, avg(salary) as dept_salary_avg
+FROM employees.salaries es
+JOIN employees.dept_emp ede USING (emp_no)
+JOIN employees.departments ed USING (dept_no)
+WHERE ede.to_date > NOW() AND es.to_date > NOW()
+GROUP BY dept_name
+);
+SELECT * FROM departments_average_salary;
+
+SELECT salary,
+    (salary - (SELECT AVG(salary) FROM salaries))
+    /
+    (SELECT stddev(salary) FROM salaries) AS zscore
+FROM salaries;
+
+
